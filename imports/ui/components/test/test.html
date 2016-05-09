@@ -1,0 +1,27 @@
+<div ng-repeat="ques in test.showquestion">
+  <p>
+    {{ques.title}} - {{ques.description}}
+  </p>
+  <div ng-repeat="lisques in ques.questionlist" ng-init="vitri=$index">
+    <p>
+    {{$index+1}} - {{lisques.ques}}
+      <p>
+        Cau tra loi
+      </p>
+      <!-- <md-radio-group ng-model="testvalue" class="md-primary">
+          <div ng-repeat="ans in lisques.answers" >
+           <md-radio-button ng-value="{{ans}}">
+              {{$index +1}}  - {{ans}}
+           </md-radio-button>
+         </div>
+       </md-radio-group> -->
+       <div ng-repeat="ans in lisques.answers">
+         <input type="radio" name="tesvalue" value="{{ans}}" ng-click="test.checkanswer(ques._id,lisques.ques,testvalue)">{{ans}}
+       </div>
+       <!-- <input type="radio" name="tam" ng-model="tam" value="vinh value">vinh
+       <input type="radio" name="tam" ng-model="tam" value="sang model">sang
+        {{tam}} -->
+    </p>
+      <input type="button"  value="check value" ng-click="test.checkanswer(ques._id,lisques.ques,testvalue)">
+  </div>
+</div>
