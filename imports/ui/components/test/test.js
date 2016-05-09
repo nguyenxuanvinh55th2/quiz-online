@@ -5,32 +5,41 @@ import uiRouter from 'angular-ui-router';
 import {Question} from '../../../api/questionList/questionList.js';
 import './test.html';
 class Test {
-  constructor($scope,$reactive) {
+  constructor($scope,$reactive,$stateParams,$state) {
     'ngInject';
     $reactive(this).attach($scope);
     this.subscribe("question");
+    this.score=0;
+    //note
+    this.test_id=$stateParams.test_id;
     this.helpers({
       showquestion(){
-        //console.log(Question.find({}));
-        return Question.find({});
-      }
-    });
-  }
-  checkanswer(id,lisques,rd)
-  {
-  //tim gia tri chon cho cau hoi
-  var gender = document.querySelector('input[name = "tesvalue"]:checked').value;
-  var ans=Question.find({$and:[{"_id":id}
-  ,{"questionlist": { $elemMatch: { "ques":lisques,"correctanswer":gender}}}]},{"questionlist.$":1}).count();
-  // console.log(ans);
-  if(ans > 0){
-        console.log("dung");
-  }
-  else {
-    console.log("sai");
-  }
+        if(Question.find({"_id":$stateParams.test_id}).count() > 0)
+        {
+          // console.log("Dung");
+          return Question.findOne({"_id":$stateParams.test_id});
+        }
+          else {
+            //console.log("sai");
+            $state.go('home');
+          }
+    }});
 
   }
+
+
+  checkanswer(que,data)
+  {
+    var ans=Question.find({$and:[{"_id":this.test_id}
+      ,{"questionlist": { $elemMatch: { "ques":{$not:{$ne:que}},"correctanswer":data}}}]},{"questionlist.$":1}).count();
+      if(ans > 0){
+              this.score ++;
+               console.log("dung");
+         }
+         else {
+           console.log("sai");
+         }
+    }
 }
 const name = 'test';
 export default angular.module(name,[
@@ -48,7 +57,7 @@ function config($stateProvider){
   'ngInject';
   $stateProvider
     .state('test', {
-      url: '/test',
+      url: '/test/:test_id',
       template: '<test></test>'
     })
 }

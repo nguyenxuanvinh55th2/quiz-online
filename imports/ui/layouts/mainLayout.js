@@ -29,5 +29,5 @@ export default angular.module(name,[
 function config($locationProvider,$urlRouterProvider){
   'ngInject';
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/test');
+  $urlRouterProvider.otherwise('/home');
 }
