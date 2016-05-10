@@ -4,15 +4,32 @@
     {{test.showquestion.title}}
     {{test.showquestion.description}}
   </p>
-  <div ng-repeat="q in test.showquestion.questionlist">
+  <!-- <div dir-paginate="q in test.showquestion.questionlist | itemsPerPage:1 | limitTo: 2">
     <p>
-      {{q.ques}}
+      cau {{$index +1}} - {{q.ques}}
     </p>
     <md-radio-group ng-model="data.group1">
       <md-radio-button  ng-repeat="an in q.answers" ng-value="an.value" class="md-primary">{{an.text}}</md-radio-button>
     </md-radio-group>
     <p>Selected Value: <span class="radioValue">{{ data.group1 }}</span> </p>
-    <!-- chu y test.function -->
-    <input type="button" ng-click="test.checkanswer(q.ques,data.group1)" value="Check answer">
+
+     <input type="button" ng-click="test.checkanswer(q.ques,data.group1)" value="Check answer">
+    <div layout="row" layout-align="space-between center">
+      <dir-pagination-controls boundary-links="true" direction-links="true" ></dir-pagination-controls>
+    </div>
+  </div> -->
+
+  <div ng-repeat="q in test.showquestion.questionlist" >
+    <div ng-show="$index == test.selectedIndex">
+      <p>
+        cau {{$index +1}} . {{q.ques}}
+      </p>
+      <md-radio-group ng-model="data.group1">
+        <md-radio-button  ng-repeat="an in q.answers" ng-value="an.value" class="md-primary">{{an.text}}</md-radio-button>
+      </md-radio-group>
+        <input type="button" ng-click="test.checkanswer(q.ques,data.group1)" value="NEXT">
+    </div>
+
   </div>
+  
 </div>
