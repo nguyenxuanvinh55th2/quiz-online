@@ -1,35 +1,36 @@
-<div>
-  <h2>{{test.score}}</h2>
-  <p>
-    {{test.showquestion.title}}
-    {{test.showquestion.description}}
-  </p>
-  <!-- <div dir-paginate="q in test.showquestion.questionlist | itemsPerPage:1 | limitTo: 2">
-    <p>
-      cau {{$index +1}} - {{q.ques}}
-    </p>
-    <md-radio-group ng-model="data.group1">
-      <md-radio-button  ng-repeat="an in q.answers" ng-value="an.value" class="md-primary">{{an.text}}</md-radio-button>
-    </md-radio-group>
-    <p>Selected Value: <span class="radioValue">{{ data.group1 }}</span> </p>
+{{test.time}}
 
-     <input type="button" ng-click="test.checkanswer(q.ques,data.group1)" value="Check answer">
-    <div layout="row" layout-align="space-between center">
-      <dir-pagination-controls boundary-links="true" direction-links="true" ></dir-pagination-controls>
-    </div>
-  </div> -->
-
-  <div ng-repeat="q in test.showquestion.questionlist" >
-    <div ng-show="$index == test.selectedIndex">
-      <p>
-        cau {{$index +1}} . {{q.ques}}
-      </p>
-      <md-radio-group ng-model="data.group1">
-        <md-radio-button  ng-repeat="an in q.answers" ng-value="an.value" class="md-primary">{{an.text}}</md-radio-button>
-      </md-radio-group>
-        <input type="button" ng-click="test.checkanswer(q.ques,data.group1)" value="NEXT">
-    </div>
-
-  </div>
-  
+<div layout="column" layout-align="center" flex-offset="30">
+  <h3>{{test.showquestion.title}} </h3>
 </div>
+
+<md-content layout-padding layout-wrap ng-show="test.isend">
+  <div layout="column" ng-repeat="q in test.showquestion.questionlist" flex="80" flex-offset="10">
+    <div ng-show="$index == test.selectedIndex">
+    <md-card>
+      <md-card-title>
+          <md-card-title-text style="min-height:50px; padding-left:5px;">
+            <h4>Câu {{$index +1}}. {{q.ques}}</h4>
+          </md-card-title-text>
+        </md-card-title>
+      <md-card-content>
+        <md-radio-group ng-model="data.group1" layout="column" >
+          <md-radio-button id="radi"  ng-repeat="an in q.answers" ng-value="an.value" class="md-warm" ng-class="{selected:$index == test.selectedRow}" ng-click="test.setClickedRow($index)">{{an.text}}</md-radio-button>
+        </md-radio-group>
+
+        <!-- <div class="radio-toolbar" ng-repeat="an in q.answers">
+          <input type="radio" ng-model="data.group1">
+          <label>{{an.text}}</label>
+        </div> -->
+      </md-card-content>
+      <div class="md-actions" layout="column" layout-align="center" style="background-color:rgb(245, 16, 30)">
+         <md-button ng-click="test.checkanswer(q.ques,data.group1)">NEXT</md-button>
+       </div>
+    </md-card>
+  </div>
+  </div>
+</md-content>
+<div ui-view>
+
+</div>
+<a href="/test/scored">xem diem</a>

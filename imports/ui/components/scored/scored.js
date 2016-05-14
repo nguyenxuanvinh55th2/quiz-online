@@ -1,28 +1,32 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
+import uiRouter from 'angular-ui-router';
 import mdDataTable from 'angular-material-data-table';
-import './homeLayout.html'
-class HomeLayout {}
-const name = 'homeLayout';
+import './scored.html';
+class Scored {
+  constructor($scope,$reactive,$stateParams,$state) {
+
+  }
+}
+const name = 'sored';
 export default angular.module(name,[
   angularMeteor,
   ngMaterial,
-  uiRouter,
-  mdDataTable
+  mdDataTable,
+  uiRouter
 ])
 .component(name,{
-  templateUrl:'imports/ui/components/homeLayout/homeLayout.html',
+  templateUrl:'imports/ui/components/scored/scored.html',
   controllerAs: name,
-  controller: HomeLayout
+  controller: Scored
 })
 .config(config);
 function config($stateProvider){
   'ngInject';
   $stateProvider
-    .state('home', {
-      url: '/home',
-      template: '<home-layout></home-layout>'
-    });
+    .state('test/scored', {
+      url: '/test/scored',
+      template: '<scored></scored>'
+    })
 }

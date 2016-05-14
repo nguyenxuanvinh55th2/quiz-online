@@ -1,2 +1,22 @@
-<input type="text" name="zipcode" value="" ng-model="zipcode">
- <a ui-sref="test({ test_id:zipcode})">test now</a>
+<!-- <input type="text" name="zipcode" value="" ng-model="zipcode">
+ <a ui-sref="test({ test_id:zipcode})">test now</a> -->
+
+<!-- <md-content layout-padding layout-wrap id="tam1">
+    Lorem ipsum dolor sit amet, ne quod novum mei
+</md-content> -->
+<div layout="row" layout-padding="10px" id="content">
+  <div flex="40"   layout-align="" flex-offset="30">
+    <md-card class="md-whiteframe-9dp">
+      <img class="md-card-image" src="card-image.png" alt="image caption">
+      <md-card-content layout="column">
+        <md-input-container layout="column">
+          <label>Vui lòng nhập mã để tham gia kì thi!</label>
+          <input type="text" ng-model="zipcode">
+        </md-input-container>
+      </md-card-content>
+      <div class="md-actions" layout="column" style="background-color:rgba(24, 149, 145, 0.52)" >
+         <md-button ui-sref="test({test_id:zipcode})">JON NOW</md-button>
+       </div>
+    </md-card>
+  </div>
+</div>
