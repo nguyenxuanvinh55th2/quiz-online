@@ -5,11 +5,11 @@ import uiRouter from 'angular-ui-router';
 import mdDataTable from 'angular-material-data-table';
 import './scored.html';
 class Scored {
-  constructor($scope,$reactive,$stateParams,$state) {
+  constructor() {
 
   }
 }
-const name = 'sored';
+const name = 'scored';
 export default angular.module(name,[
   angularMeteor,
   ngMaterial,
@@ -25,8 +25,8 @@ export default angular.module(name,[
 function config($stateProvider){
   'ngInject';
   $stateProvider
-    .state('test/scored', {
+    .state('testScored', {
       url: '/test/scored',
       template: '<scored></scored>'
-    })
+    });
 }

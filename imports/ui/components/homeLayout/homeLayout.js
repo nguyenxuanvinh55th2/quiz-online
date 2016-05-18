@@ -3,8 +3,39 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import mdDataTable from 'angular-material-data-table';
-import './homeLayout.html'
-class HomeLayout {}
+import './homeLayout.html';
+import {Question} from '../../../api/question';
+import {Exam} from '../../../api/examination';
+import {Meteor} from 'meteor/meteor';
+class HomeLayout {
+  constructor($scope,$reactive,$state,$stateParams) {
+    'ngInject';
+    $reactive(this).attach($scope);
+    this.state = $state;
+    this.subscribe("question");
+    this.subscribe("examination");
+    this.tam ;
+    // this.helpers({
+    //   load: function(){
+    //     console.log("hello vinh dep trai");
+    //   }
+    // });
+  }
+  login(data){
+    if(Meteor.userId() === null)
+      this.state.go("login");
+      else {
+        //findOne thi moi truy van den con cua no va ko co fetch
+        var val  = Exam.findOne({"_id":"69366"},{fields:{'questionSetId':1,"_id":0}});
+        //console.log(val["questionSetId"]);
+        //console.log(val.questionSetId);
+        //console.log(val);
+        this.tam=val.questionSetId;
+        this.state.go("test",{'exam_id':"69366",'test_id':val.questionSetId});
+      }
+
+  }
+}
 const name = 'homeLayout';
 export default angular.module(name,[
   angularMeteor,

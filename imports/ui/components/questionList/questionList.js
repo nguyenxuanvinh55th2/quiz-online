@@ -3,24 +3,14 @@ import angularMeteor from 'angular-meteor';
 import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
 import './questionList.html'
-import {Question} from '../../../api/questionList/questionList.js'
-import {name as tamList} from '../tamList/tamList';
+import {Question} from '../../../api/question'
 import {name as homeLayout} from '../homeLayout/homeLayout';
-class QuestionList {
-  constructor($scope,$reactive) {
-    'ngInject';
-    $reactive(this).attach($scope);
-    this.helpers({
-
-    });
-  }
-}
+class QuestionList {}
 const name = 'questionList';
 export default angular.module(name,[
   angularMeteor,
   ngMaterial,
-  uiRouter,
-  tamList
+  uiRouter
 ])
 .component(name,{
   templateUrl:'imports/ui/components/questionList/questionList.html',

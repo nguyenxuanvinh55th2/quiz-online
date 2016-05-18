@@ -5,6 +5,8 @@ import uiRouter from 'angular-ui-router';
 import {name as homeLayout} from '../components/homeLayout/homeLayout';
 import {name as questionList} from '../components/questionList/questionList';
 import {name as test} from '../components/test/test';
+import {name as scored} from '../components/scored/scored';
+import {name as login} from '../components/login/login';
 import './mainLayout.html'
 class MainLayout {
   constructor() {
@@ -17,8 +19,10 @@ export default angular.module(name,[
   ngMaterial,
   uiRouter,
   homeLayout,
-  questionList,
-  test
+  scored,
+  test,
+  'accounts.ui',
+  login
 ])
 .component(name,{
   templateUrl:'imports/ui/layouts/mainLayout.html',

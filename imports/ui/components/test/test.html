@@ -1,21 +1,28 @@
+<button id="button" ng-click="test.runtime()">start</button>
 {{test.time}}
-
-<div layout="column" layout-align="center" flex-offset="30">
+<p>
+  {{test.score}}
+</p>
+<div layout="column" layout-align="center" flex-offset="10">
   <h3>{{test.showquestion.title}} </h3>
 </div>
-
 <md-content layout-padding layout-wrap ng-show="test.isend">
-  <div layout="column" ng-repeat="q in test.showquestion.questionlist" flex="80" flex-offset="10">
+  <div layout="column" ng-repeat="q in test.showquestion.questionSet" flex="80" flex-offset="10" ng-init="vitri = $index">
     <div ng-show="$index == test.selectedIndex">
     <md-card>
       <md-card-title>
           <md-card-title-text style="min-height:50px; padding-left:5px;">
-            <h4>Câu {{$index +1}}. {{q.ques}}</h4>
+            <h4>Câu {{$index +1}}. {{q.question}}</h4>
+
           </md-card-title-text>
         </md-card-title>
+        <md-divider></md-divider>
+        <!-- ng-click de chon hien ung cho ngclass -->
       <md-card-content>
         <md-radio-group ng-model="data.group1" layout="column" >
-          <md-radio-button id="radi"  ng-repeat="an in q.answers" ng-value="an.value" class="md-warm" ng-class="{selected:$index == test.selectedRow}" ng-click="test.setClickedRow($index)">{{an.text}}</md-radio-button>
+          <md-divider></md-divider>
+          <md-radio-button id="radi"  ng-repeat="an in q.answerSet" ng-value="an" class="md-warm" ng-class="{selected:$index == test.selectedRow}" ng-click="test.setClickedRow($index)">{{an}}</md-radio-button>
+          <md-divider></md-divider>
         </md-radio-group>
 
         <!-- <div class="radio-toolbar" ng-repeat="an in q.answers">
@@ -23,14 +30,14 @@
           <label>{{an.text}}</label>
         </div> -->
       </md-card-content>
+      <!-- bat su kien next truyen vao vi tri cau hoi, cau hoi va cau tra loi -->
       <div class="md-actions" layout="column" layout-align="center" style="background-color:rgb(245, 16, 30)">
-         <md-button ng-click="test.checkanswer(q.ques,data.group1)">NEXT</md-button>
+         <md-button ng-click="test.checkanswer(q.question,data.group1,vitri)">NEXT</md-button>
        </div>
     </md-card>
   </div>
   </div>
 </md-content>
-<div ui-view>
-
-</div>
 <a href="/test/scored">xem diem</a>
+<a href="/questionlist/tam">tam</a>
+<a href="/login">Login di may</a>
