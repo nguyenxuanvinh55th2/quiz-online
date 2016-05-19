@@ -1,0 +1,17 @@
+<div layout="column" layout-padding layout-margin>
+  <md-table-container class="md-whiteframe-9dp">
+    <table md-table>
+      <thead md-head >
+        <tr md-row>
+          <th md-column >User</th>
+          <th md-column >score</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr ng-repeat="inf in information.infor.usersList">
+          <td md-cell>{{inf.userId}}</td>
+          <td md-cell>{{inf.scored}}</td></tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</div>

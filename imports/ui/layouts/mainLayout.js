@@ -7,6 +7,7 @@ import {name as questionList} from '../components/questionList/questionList';
 import {name as test} from '../components/test/test';
 import {name as scored} from '../components/scored/scored';
 import {name as login} from '../components/login/login';
+import {name as information} from '../components/information/information';
 import './mainLayout.html'
 class MainLayout {
   constructor() {
@@ -22,7 +23,8 @@ export default angular.module(name,[
   scored,
   test,
   'accounts.ui',
-  login
+  login,
+  information
 ])
 .component(name,{
   templateUrl:'imports/ui/layouts/mainLayout.html',

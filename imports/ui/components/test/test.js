@@ -5,6 +5,7 @@ import utilsPagination from 'angular-utils-pagination';
 import  mdDataTable from 'angular-material-data-table';
 import {Question} from '../../../api/question';
 import {Exam} from '../../../api/examination';
+// goi duoi server
 import {Meteor} from 'meteor/meteor';
 import './test.html';
 class Test {
@@ -16,36 +17,33 @@ class Test {
     this.selectedIndex = 0 ;//hien ra cau hoi thu i
     this.isend = true;//kiem tra het cau hoi chua
     //note
-    this.test_id=$stateParams.test_id;
+    this.question_id=$stateParams.question_id;
+    this.exam_id=$stateParams.exam_id;
     this.val;
     this.time=60;
     this.state=$state;
     this.selectedRow = null;
     this.helpers({
+
+      getuser(){
+        if(Meteor.userId() === null)
+        {
+            this.state.go("home");
+        }
+      },
       showquestion(){
 
-        if(Question.find({"_id":$stateParams.test_id}).count() > 0)
+        if(Question.find({"_id":$stateParams.question_id}).count() > 0)
         {
-          val=Question.findOne({"_id":$stateParams.test_id});
-            //console.log(val.questionlist.length-1);
-          // console.log("Dung");
-          return Question.findOne({"_id":$stateParams.test_id});
+          val=Question.findOne({"_id":$stateParams.question_id});
+          return Question.findOne({"_id":$stateParams.question_id});
         }
           else {
-            //console.log("sai");
-          //  $state.go('test',{'test_id':'572d4573bcd8a80f3bd12345'});
            $state.go('home');
-          console.log("message");
-
           }
-    },
-    //ngan chan user logout luc dang vao ki thi, neu dang thi ma log ra thi se dieu den trang khac
-    getuser(){
-      if(Meteor.userId() === null)
-      {
-          this.state.go("home");
-      }
     }
+    //ngan chan user logout luc dang vao ki thi, neu dang thi ma log ra thi se dieu den trang khac
+
     // timerun(){
     //   //this.runtime();
     //   console.log(this.time);
@@ -78,11 +76,12 @@ class Test {
   checkanswer(que,data,vitri)
   {
     console.log(vitri);
-    var ans=Question.findOne({$and:[{"_id":this.test_id}
+    var ans=Question.findOne({$and:[{"_id":this.question_id}
       ,{"questionSet": { $elemMatch: { "question":{$not:{$ne:que}},"correctAnswerSet":data}}}]});
     //  console.log(ans.questionSet[vitri].scored);
-      if(ans != null){
+      if(ans !== null){
               this.score =this.score + ans.questionSet[vitri].scored;
+              Meteor.call("updateExam",this.exam_id,Meteor.userId(),this.score);
                console.log("dung");
          }
          else {
@@ -119,7 +118,7 @@ function config($stateProvider){
   'ngInject';
   $stateProvider
     .state('test', {
-      url: '/test/:exam_id/:test_id',
+      url: '/test/:exam_id/:question_id',
       template: '<test></test>',
       resolve: {
         currentUser($q){

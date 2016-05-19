@@ -15,22 +15,44 @@ class HomeLayout {
     this.subscribe("question");
     this.subscribe("examination");
     this.tam ;
-    // this.helpers({
-    //   load: function(){
-    //     console.log("hello vinh dep trai");
-    //   }
-    // });
   }
-  loginExam(data){
+  loginExam(zipcode){
     if(Meteor.userId() === null)
       this.state.go("login");
       else {
-        //findOne thi moi truy van den con cua no va ko co fetch
-        var val  = Exam.findOne({"_id":"69366"},{fields:{'questionSetId':1,"_id":0}});
-        //muon truyen nhieu dieu kien thi phai thuc hien o server dung methods o server va client thi goi lai
-        Meteor.call("updateExam","69366","vinh",67);
-        this.tam=val.questionSetId;
-        this.state.go("test",{'exam_id':"69366",'test_id':val.questionSetId});
+
+        if (zipcode == null) {
+          this.state.go("home");
+        }
+        else {
+          //findOne thi moi truy van den con cua no va ko co fetch
+          var val  = Exam.findOne({"_id":zipcode},{fields:{'questionSetId':1,"_id":0}});
+          if(val !== null)
+          {
+            //push mot doi usersList vao trong collection examination
+            var checkexit = Exam.find({$and:[{_id:zipcode},{"usersList":{$elemMatch:{"userId":Meteor.userId()}}}]}).count();
+            //neu userId da ton tai tron examination thi cap nhat lai diem so con neu chua thi tao mot truong moi
+            if(checkexit > 0){
+              //neu da ton tai thi cap nhap lai diem = 0
+              console.log("ton tai");
+              Meteor.call("updateExam",zipcode,Meteor.userId(),0);
+
+            }
+            else {
+              console.log(" chua ton tai");
+              Exam.update({_id:zipcode}, {$push:{
+                "usersList":{"userId":Meteor.userId(),"scored":0}
+              }});
+            }
+            //muon truyen nhieu dieu kien thi phai thuc hien o server dung methods o server va client thi goi lai
+          //  Meteor.call("updateExam",zipcode,Meteor.userId(),0);
+            this.tam=val.questionSetId;
+            this.state.go("test",{'exam_id':zipcode,'question_id':val.questionSetId});
+          }
+            else {
+                this.state.go("home");
+            }
+        }
       }
   }
 }
