@@ -4,6 +4,7 @@ import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import  mdDataTable from 'angular-material-data-table';
 import {Question} from '../../../api/question';
+import {Exam} from '../../../api/examination';
 import {Meteor} from 'meteor/meteor';
 import './test.html';
 class Test {

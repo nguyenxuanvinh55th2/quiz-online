@@ -21,19 +21,17 @@ class HomeLayout {
     //   }
     // });
   }
-  login(data){
+  loginExam(data){
     if(Meteor.userId() === null)
       this.state.go("login");
       else {
         //findOne thi moi truy van den con cua no va ko co fetch
         var val  = Exam.findOne({"_id":"69366"},{fields:{'questionSetId':1,"_id":0}});
-        //console.log(val["questionSetId"]);
-        //console.log(val.questionSetId);
-        //console.log(val);
+        //muon truyen nhieu dieu kien thi phai thuc hien o server dung methods o server va client thi goi lai
+        Meteor.call("updateExam","69366","vinh",67);
         this.tam=val.questionSetId;
         this.state.go("test",{'exam_id':"69366",'test_id':val.questionSetId});
       }
-
   }
 }
 const name = 'homeLayout';
