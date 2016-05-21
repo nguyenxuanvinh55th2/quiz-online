@@ -1,5 +1,5 @@
 {
-  "name": "quiz-online",
+  "name": "Testing2",
   "private": true,
   "scripts": {
     "start": "meteor run"
@@ -16,7 +16,8 @@
     "angular-route": "^1.5.5",
     "angular-sanitize": "^1.5.5",
     "angular-ui-router": "^0.2.18",
-    "angular-utils-pagination": "^0.11.1",
-    "meteor-node-stubs": "~0.2.0"
+    "cryptr": "^2.0.0",
+    "ionic-sdk": "^1.2.4",
+    "meteor-node-stubs": "^0.2.3"
   }
 }

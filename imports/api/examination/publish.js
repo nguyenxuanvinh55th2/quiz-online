@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import {Exam} from './collection.js';
+import {Examination} from './collection.js';
 if(Meteor.isServer){
-  Meteor.publish('examination', function(){
-    return Exam.find({});//note
-  });
-}
+    Meteor.publish('examination', function(){
+      return Examination.find({});//note
+    });
+  }

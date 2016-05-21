@@ -1,6 +1,6 @@
 import {Mongo} from 'meteor/mongo';
-export const Examination =new Mongo.Collection("examination");
-Examination.allow({
+export const QuestionBankData = new Mongo.Collection('questionbank');
+QuestionBankData.allow({
   insert: function(){
     return true;
   },

@@ -15,10 +15,16 @@ standard-minifier-css   # CSS minifier run for production mode
 standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
+insecure                # Allow all DB writes from clients (for prototyping)
 angular-templates
 pbastowski:angular-babel
-less
-mizzao:user-status
-dab0mb:ionic-assets
-accounts-password
+accounts-facebook
+accounts-google
 dotansimha:accounts-ui-angular
+email
+meteorhacks:ssr
+session
+simple:reactive-method
+mizzao:user-status
+less
+planettraining:material-design-icons
